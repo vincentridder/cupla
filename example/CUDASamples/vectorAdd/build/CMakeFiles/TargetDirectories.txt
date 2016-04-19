@@ -1,3 +1,0 @@
-/home/ridder90/cupla/example/CUDASamples/vectorAdd/build/CMakeFiles/vectorAdd.dir
-/home/ridder90/cupla/example/CUDASamples/vectorAdd/build/CMakeFiles/cupla.dir
-/home/ridder90/cupla/example/CUDASamples/vectorAdd/build/CMakeFiles/alpaka.dir

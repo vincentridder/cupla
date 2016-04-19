@@ -1,2 +1,0 @@
-/usr/bin/ar cq libcupla.a  
-/usr/bin/ranlib libcupla.a
