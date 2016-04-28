@@ -184,7 +184,6 @@ main(int argc, char *argv[])
         fprintf(stderr, "Failed to free device vector B (error code %s)!\n", cudaGetErrorString(err));
         exit(EXIT_FAILURE);
     }
-
     err = cudaFree(d_C);
 
     if (err != cudaSuccess)
