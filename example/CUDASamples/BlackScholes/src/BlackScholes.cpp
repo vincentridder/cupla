@@ -53,7 +53,7 @@ float RandFloat(float low, float high)
 // Data configuration
 ////////////////////////////////////////////////////////////////////////////////
 const int OPT_N = 4000000;
-const int  NUM_ITERATIONS = 1;
+const int  NUM_ITERATIONS = 500;
 
 
 size_t OPT_SZ = OPT_N * sizeof(float);

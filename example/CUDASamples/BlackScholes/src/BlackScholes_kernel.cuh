@@ -13,6 +13,16 @@
 
 #include <cuda_to_cupla.hpp>
 #include <stdio.h>
+#ifndef __CUDACC__
+struct float2{
+    float x;
+    float y;
+    float2(float x, float y) : y(y), x(x) { }
+};
+float2 make_float2(float x, float y){
+    return float2(x,y);
+}
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // Polynomial approximation of cumulative normal distribution function
@@ -32,20 +42,12 @@ float cndGPU(T_Acc const & acc, float d)
     K = __fdividef(1.0f, (1.0f + 0.2316419f * fabsf(d)));
     float cnd = RSQRT2PI * __expf(- 0.5f * d * d) *
           (K * (A1 + K * (A2 + K * (A3 + K * (A4 + K * A5)))));
-
     if (d > 0)
         cnd = 1.0f - cnd;
 
     return cnd;
 }
-struct float2{
-    float x;
-    float y;
-    float2(float x, float y) : y(y), x(x) { }
-};
-float2 make_float2(float x, float y){
-    return float2(x,y);
-}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Black-Scholes formula for both call and put
@@ -64,9 +66,9 @@ ALPAKA_FN_ACC void BlackScholesBodyGPU(
 {
     float sqrtT, expRT;
     float d1, d2, CNDD1, CNDD2;
-
     sqrtT = __fdividef(1.0F, rsqrtf(T));
     d1 = __fdividef(__logf(S / X) + (R + 0.5f * V * V) * T, V * sqrtT);
+
     d2 = d1 - V * sqrtT;
 
     CNDD1 = cndGPU(acc, d1);
