@@ -37,7 +37,7 @@ extern "C" void BlackScholesCPU(
 ////////////////////////////////////////////////////////////////////////////////
 // Process an array of OptN options on GPU
 ////////////////////////////////////////////////////////////////////////////////
-#include "BlackScholes_kernel.cpp"
+#include "BlackScholes_kernel.cuh"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helper function, returning uniformly distributed
@@ -53,10 +53,10 @@ float RandFloat(float low, float high)
 // Data configuration
 ////////////////////////////////////////////////////////////////////////////////
 const int OPT_N = 4000000;
-const int  NUM_ITERATIONS = 512;
+const int  NUM_ITERATIONS = 1;
 
 
-const int          OPT_SZ = OPT_N * sizeof(float);
+size_t OPT_SZ = OPT_N * sizeof(float);
 const float      RISKFREE = 0.02f;
 const float    VOLATILITY = 0.30f;
 
